@@ -93,6 +93,11 @@ func main() {
 			Usage:  "docker daemon IPv6 networking",
 			EnvVar: "PLUGIN_IPV6",
 		},
+		cli.StringFlag{
+			Name:   "daemon.fixed-cidr-v6",
+			Usage:  "docker daemon IPv6 subnet",
+			EnvVar: "PLUGIN_FIXED_CIDR_V6",
+		},
 		cli.BoolFlag{
 			Name:   "daemon.experimental",
 			Usage:  "docker daemon Experimental mode",
@@ -278,6 +283,7 @@ func run(c *cli.Context) error {
 			Insecure:      c.Bool("daemon.insecure"),
 			Disabled:      c.Bool("daemon.off"),
 			IPv6:          c.Bool("daemon.ipv6"),
+			FixedCidrV6:   c.String("daemon.fixed-cidr-v6"),
 			Debug:         c.Bool("daemon.debug"),
 			Bip:           c.String("daemon.bip"),
 			DNS:           c.StringSlice("daemon.dns"),

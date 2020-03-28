@@ -25,6 +25,7 @@ type (
 		DNSSearch     []string // Docker daemon dns search domain
 		MTU           string   // Docker daemon mtu setting
 		IPv6          bool     // Docker daemon IPv6 networking
+		FixedCidrV6   string   // Docker daemon IPv6 subnet
 		Experimental  bool     // Docker daemon enable experimental mode
 	}
 
@@ -340,6 +341,9 @@ func commandDaemon(daemon Daemon) *exec.Cmd {
 	}
 	if daemon.IPv6 {
 		args = append(args, "--ipv6")
+	}
+	if len(daemon.FixedCidrV6) != 0 {
+		args = append(args, "--fixed-cidr-v6", daemon.FixedCidrV6)
 	}
 	if len(daemon.Mirror) != 0 {
 		args = append(args, "--registry-mirror", daemon.Mirror)
