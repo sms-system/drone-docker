@@ -120,6 +120,11 @@ func main() {
 			EnvVar: "PLUGIN_DOCKERFILE",
 		},
 		cli.StringFlag{
+			Name:   "network",
+			Usage:  "build network",
+			EnvVar: "PLUGIN_NETWORK",
+		},
+		cli.StringFlag{
 			Name:   "context",
 			Usage:  "build context",
 			Value:  ".",
@@ -260,6 +265,7 @@ func run(c *cli.Context) error {
 			Remote:      c.String("remote.url"),
 			Name:        c.String("commit.sha"),
 			Dockerfile:  c.String("dockerfile"),
+			Network:     c.String("network"),
 			Context:     c.String("context"),
 			Tags:        c.StringSlice("tags"),
 			Args:        c.StringSlice("args"),

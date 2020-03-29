@@ -43,6 +43,7 @@ type (
 		Remote      string   // Git remote URL
 		Name        string   // Docker build using default named tag
 		Dockerfile  string   // Docker build Dockerfile
+		Network     string   // Docker build network
 		Context     string   // Docker build context
 		Tags        []string // Docker build tags
 		Args        []string // Docker build args
@@ -214,6 +215,9 @@ func commandBuild(build Build) *exec.Cmd {
 		"--rm=true",
 		"-f", build.Dockerfile,
 		"-t", build.Name,
+	}
+	if len(build.Network) != 0 {
+		args = append(args, "--network", build.Network)
 	}
 
 	args = append(args, build.Context)
